@@ -36,7 +36,7 @@ namespace gameapp
             string wordtoplay = wordCluePairs[randomIndex].word;
             string clue = wordCluePairs[randomIndex].clue;
 
-            Console.WriteLine($"Random word:{wordtoplay}");
+            //Console.WriteLine($"Random word:{wordtoplay}");
             Console.WriteLine($"Clue:{clue}");
             Console.WriteLine("Enter your name");
             string userinput = Console.ReadLine();
@@ -44,13 +44,174 @@ namespace gameapp
 
             static void Comparingoperation(string target, string name)
             {
+                string[] hangmanStages = new string[]
+{
+
+
+    @"                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+                                    
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+                                    
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+               ░██                  
+                                    
+                                    
+                                    
+            ░██████ ░██████ ░██████ 
+                                    
+            ░██████ ░██████ ░██████ 
+                                    
+                                    
+                                    
+                                    
+                                    ",
+
+    @"      ░██                  
+      ░██                  
+      ░██                  
+      ░██                  
+      ░██                  
+      ░██                  
+      ░██                  
+      ░██                  
+      ░██                  
+                           
+      ░██                  
+      ░██                  
+      ░██                  
+      ░██                  
+      ░██                  
+      ░██                  
+      ░██                  
+      ░██                  
+      ░██                  
+                           
+        ░██████            
+       ░██   ░██           
+      ░██     ░██          
+      ░██     ░██          
+      ░██     ░██          
+       ░██   ░██           
+        ░██████            
+                           
+                           
+                           
+                           
+                           
+   ░██████ ░██████ ░██████ 
+                           
+   ░██████ ░██████ ░██████ 
+                           
+                           
+                           
+                           
+                           ",
+
+    @"   ░██                  
+   ░██                  
+   ░██                  
+   ░██                  
+   ░██                  
+   ░██                  
+   ░██                  
+   ░██                  
+   ░██                  
+                        
+   ░██                  
+   ░██                  
+   ░██                  
+   ░██                  
+   ░██                  
+   ░██                  
+   ░██                  
+   ░██                  
+   ░██                  
+                        
+     ░██████            
+    ░██   ░██           
+   ░██     ░██          
+   ░██     ░██          
+   ░██     ░██          
+    ░██   ░██           
+     ░██████            
+                        
+                        
+                        
+      ░██ ░██ ░██       
+     ░██  ░██  ░██      
+    ░██   ░██   ░██     
+   ░██    ░██    ░██    
+  ░██     ░██     ░██   
+ ░██      ░██      ░██  
+░██       ░██       ░██ 
+          ░██           
+          ░██           
+                        
+      ░██    ░██        
+     ░██      ░██       
+    ░██        ░██      
+   ░██          ░██     
+  ░██            ░██    
+ ░██              ░██   
+░██                ░██  
+                        
+                        
+                        
+                        
+                        
+░██████ ░██████ ░██████ 
+                        
+░██████ ░██████ ░██████ 
+                        
+                        
+                        
+                        
+                        "
+    
+};
+
                 Console.WriteLine("WELCOME TO HANGMAN LETS BEGIN!!");
                 char[] revealed = new string('_', target.Length).ToCharArray();
                 int chances = 3;
+                int hangerdiagram = 0;
                 while (chances > 0 && new string(revealed) != target)
                 {
                     Console.WriteLine($"CHANCES LEFT:{chances}");
                     Console.WriteLine($"WORD:{string.Join(" ", revealed)}");
+                    //Console.WriteLine(hangmanStages[]);
                     Console.WriteLine("ENTER A GUESS CHARACTER");
                     string guessread = Console.ReadLine();
                     if (string.IsNullOrEmpty(guessread)) continue;
@@ -69,12 +230,16 @@ namespace gameapp
                     {
                         chances = 3;
                         Console.WriteLine("CORRECT GUESS CHANCES RESET TO 3");
+                        hangerdiagram = 0;
                     }
                     else
                     {
                         chances--;
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine($"Got it wrong only {chances} left ");
-
+                        Console.WriteLine(hangmanStages[hangerdiagram]);
+                        hangerdiagram++;
+                        Console.ResetColor();
 
                     }
 
@@ -85,13 +250,29 @@ namespace gameapp
                 if (new string(revealed) == target)
                 {
                     // status = Gamestatus.Playerwon;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    string successart = @"   ░██████   ░██     ░██   ░██████    ░██████  ░██████████   ░██████     ░██████   
+ ░██   ░██  ░██     ░██  ░██   ░██  ░██   ░██ ░██          ░██   ░██   ░██   ░██  
+░██         ░██     ░██ ░██        ░██        ░██         ░██         ░██         
+ ░████████  ░██     ░██ ░██        ░██        ░█████████   ░████████   ░████████  
+        ░██ ░██     ░██ ░██        ░██        ░██                 ░██         ░██ 
+ ░██   ░██   ░██   ░██   ░██   ░██  ░██   ░██ ░██          ░██   ░██   ░██   ░██  
+  ░██████     ░██████     ░██████    ░██████  ░██████████   ░██████     ░██████   
+                                                                                  
+                                                                                  
+                                                                                  ";
 
-                    Console.WriteLine($"{name} you got it right time to move to next level");
+                    Console.WriteLine(successart);
+                    Console.WriteLine($"{ name} you got it right time to move to next level");
+                    Console.ResetColor();
                 }
                 else
                 {
                     // status = Gamestatus.PlayerLost;
+                    Console.ForegroundColor = ConsoleColor.Red;
+
                     Console.WriteLine($"{name} you lost it try again");
+                    Console.ResetColor();
                 }
 
 
