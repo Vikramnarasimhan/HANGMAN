@@ -34,13 +34,13 @@ namespace gameapp
             string wordtoplay=wordarray[randominmyarray];
             Console.WriteLine($"Random word:{wordtoplay}");
             Console.WriteLine($"{wordtoplay.Length}");
-           // Console.WriteLine("Enter a word");
-           // string userinput=Console.ReadLine();
-            Comparingoperation( wordtoplay);
+            Console.WriteLine("Enter your name");
+            string userinput=Console.ReadLine();
+            Comparingoperation( wordtoplay,userinput);
 
-            static void Comparingoperation(string target)
+            static void Comparingoperation(string target,string name)
             {
-
+                Console.WriteLine("WELCOME TO HANGMAN LETS BEGIN!!");
                 char[] revealed = new string('_', target.Length).ToCharArray();
                 int chances = 3;
                 while (chances > 0 && new string(revealed) != target) {
@@ -48,6 +48,8 @@ namespace gameapp
                     Console.WriteLine($"WORD:{string.Join(" ",revealed)}");
                     Console.WriteLine("ENTER A GUESS CHARACTER");
                     string guessread=Console.ReadLine();
+                    if (string.IsNullOrEmpty(guessread)) continue;
+
                     char guess = guessread[0];
                     bool correct = false;
                     for (int i = 0; i < target.Length; i++)
@@ -76,13 +78,13 @@ namespace gameapp
                 }
                 if (new string(revealed) == target)
                 {
-                    status = Gamestatus.Playerwon;
+                   // status = Gamestatus.Playerwon;
 
-                    Console.WriteLine("Bro you got it right time to move to next level");
+                    Console.WriteLine($"{name} you got it right time to move to next level");
                 }
                 else {
-                    status = Gamestatus.PlayerLost;
-                    Console.WriteLine("Bro you lost it");
+                   // status = Gamestatus.PlayerLost;
+                    Console.WriteLine($"{name} you lost it try again");
                 }
 
 
